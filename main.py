@@ -91,6 +91,9 @@ class ModernEntry(ttk.Frame):
         self.entry.insert(0, str(default_value))
         self.entry.grid(row=0, column=1, sticky='ew', pady=(0, 5))
 
+    def get(self):
+        return self.entry.get()
+
 
 class SlideShow:
     def __init__(self, root: tk.Tk, slides: List[Dict[str, str]]):
@@ -131,6 +134,18 @@ class SlideShow:
         # Get user inputs
         self.setup_styles()
         self.get_parameters()
+
+    def log_trigger(self, stage, slide_info=None):
+        timestamp = time.time()
+        trigger_data = {
+            'timestamp': timestamp,
+            'stage': stage,
+            'slide_number': self.current_slide if slide_info else None,
+            'slide_text': self.slides[self.current_slide]['text'] if slide_info else None,
+            'slide_image': self.slides[self.current_slide]['image'] if slide_info else None,
+            'repeat_number': self.current_repeat
+        }
+        self.triggers.append(trigger_data)
 
     def setup_styles(self):
         # Configure the style for the modern UI
@@ -395,10 +410,10 @@ class SlideShow:
 
 def main():
     slides = [
-        {"text": "فوق", "image": "up.webp"},
-        {"text": "تحت", "image": "down.webp"},
-        {"text": "اختيار", "image": "select.webp"},
-        {"text": "إلغاء", "image": "cancel.webp"},
+        {"text": "فوق", "image": "./images/up.webp"},
+        {"text": "تحت", "image": "./images/down.webp"},
+        {"text": "اختيار", "image": "./images/select.webp"},
+        {"text": "إلغاء", "image": "./images/cancel.webp"},
     ]
 
     root = tk.Tk()
