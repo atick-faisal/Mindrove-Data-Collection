@@ -17,7 +17,7 @@ This application is designed to collect EEG data using a MindRove device while p
 Install the required packages using pip:
 
 ```bash
-pip install tk pillow pandas numpy mindrove
+pip install pillow pandas numpy mindrove
 ```
 
 ### Directory Structure
