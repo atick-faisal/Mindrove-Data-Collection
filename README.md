@@ -8,8 +8,8 @@ This application is designed to collect EEG data using a MindRove device while p
 
 ### Prerequisites
 
+0. Mindrove Headset
 1. Python 3.8 or higher
-2. MindRove SDK
 3. Pip (Python package installer)
 
 ### Required Python Packages
@@ -17,7 +17,7 @@ This application is designed to collect EEG data using a MindRove device while p
 Install the required packages using pip:
 
 ```bash
-pip install tk pillow pandas numpy mindrove
+pip install pillow pandas numpy mindrove
 ```
 
 ### Directory Structure
