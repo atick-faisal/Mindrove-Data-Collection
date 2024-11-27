@@ -13,6 +13,10 @@ import pandas as pd
 from PIL import Image, ImageTk
 from mindrove.board_shim import BoardShim, MindRoveInputParams, BoardIds
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+imgdir = os.path.join(current_dir, "images")
+datadir = os.path.join(current_dir, "data")
+
 
 class EEGDataCollector:
     def __init__(self, data_queue: Queue):
@@ -96,7 +100,7 @@ class ModernEntry(ttk.Frame):
 
 
 class SlideShow:
-    def __init__(self, root: tk.Tk, slides: List[Dict[str, str]]):
+    def __init__(self, root: tk.Tk, slides: List[Dict[str, str]], data_dir: str = None):
         self.root = root
         self.slides = slides
         self.current_slide = 0
@@ -106,7 +110,7 @@ class SlideShow:
         self.subject_name = "unnamed"
 
         # Create data directory
-        self.data_dir = "./data"
+        self.data_dir = data_dir
         os.makedirs(self.data_dir, exist_ok=True)
 
         # Initialize trigger logging
@@ -410,14 +414,14 @@ class SlideShow:
 
 def main():
     slides = [
-        {"text": "فوق", "image": "./images/up.webp"},
-        {"text": "تحت", "image": "./images/down.webp"},
-        {"text": "اختيار", "image": "./images/select.webp"},
-        {"text": "إلغاء", "image": "./images/cancel.webp"},
+        {"text": "فوق", "image": os.path.join(imgdir, "up.webp")},
+        {"text": "تحت", "image": os.path.join(imgdir, "down.webp")},
+        {"text": "اختيار", "image": os.path.join(imgdir, "select.webp")},
+        {"text": "إلغاء", "image": os.path.join(imgdir, "cancel.webp")},
     ]
 
     root = tk.Tk()
-    app = SlideShow(root, slides)
+    app = SlideShow(root, slides, datadir)
     root.mainloop()
 
 
